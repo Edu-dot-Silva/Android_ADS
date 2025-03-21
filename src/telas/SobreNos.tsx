@@ -9,8 +9,7 @@ import { useVideoPlayer, VideoView } from "expo-video";
 export default function SobreNos() {
 
     // indica o video e coloco em looping
-    const player = useVideoPlayer('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4', player =>{
-    });
+    const player = useVideoPlayer('https://drive.google.com/uc?export=download&id=1xuxIIyK85x-4uf_Qzjnv4aX0Ksjr8sJW', player =>{});
 
     return <ScrollView style={estilos.fundo}>
         {/* colocando a cor de fundo */}
@@ -28,7 +27,7 @@ export default function SobreNos() {
             {'\n'}
             Seu talento multidisciplinar e sua busca incessante pelo conhecimento o tornaram uma figura central no Renascimento, um período de grandes avanços nas ciências e nas artes.</Texto>
 
-        <Image source={require('..//..//assets/davinci.jpg')} style={estilos.img_davinci} resizeMode="contain"></Image>
+        <Image source={require('..//..//assets/davinci3.jpg')} style={estilos.img_davinci} resizeMode="contain"></Image>
     
         <Texto style={estilos.texto_sobre_video}> Sugerimos o vídeo abaixo para melhor entendimento e experiência no app! </Texto>
 
@@ -56,7 +55,8 @@ const estilos = StyleSheet.create({
     texto_sobre_video: {
         color: "#a38a5a",
         // classe especifica para texto sobre nos
-        fontWeight: 'bold',
+        fontFamily: "FonteTangerineNegrito",
+        fontSize: 32,
     },
     img_davinci: {
         height: 400,
