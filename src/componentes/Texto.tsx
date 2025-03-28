@@ -17,7 +17,6 @@ const estilos = StyleSheet.create({
     padrao : {
         fontSize: 32,
         textAlign: "center",
-        lineHeight: 25,
         fontFamily: "FonteRegular",
         letterSpacing: 1,
         lineHeight: 30,
