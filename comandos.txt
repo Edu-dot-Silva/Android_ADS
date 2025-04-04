@@ -1,0 +1,3 @@
+se estiver com alerta em amarelo quando iniciar o app, atualizar o que esta pedindo
+
+npm install expo@52.0.42 react-native@0.76.9

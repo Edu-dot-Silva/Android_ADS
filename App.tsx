@@ -9,6 +9,18 @@ import {Image} from "react-native";
 
 import SobreNos from "./src/telas/SobreNos";
 
+
+//Menu Obras
+import Obra from './src/telas/Obras';
+import MockObras from "./src/mocks/listaObras";
+import Citacoes from "./src/telas/Citacoes/Citacoes";
+import Quiz from "./src/telas/Quiz/Quiz";
+import Livros from "./src/telas/Citacoes/Citacoes";
+
+function Obras() {
+  return <Obra {...MockObras}/>
+}
+
 // configurando menu
 const Tab = createBottomTabNavigator();
 
@@ -16,8 +28,8 @@ function Menu() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: "#e8e4db",
-        tabBarInactiveTintColor: "#c0b091",
+        tabBarActiveTintColor: "#e8e4db", // Cor da fonte quando o Tab.Screen está selecionado
+        tabBarInactiveTintColor: "#c0b091", // Cor da fonte quando o Tab.Screen não está selecionado
         headerShown: false,
         tabBarStyle: {
           backgroundColor: "#a38a5a",
@@ -25,9 +37,10 @@ function Menu() {
           left: 0,
           right: 0,
           height: 60,
+          padding: 8
         },
         tabBarLabelStyle: {
-          fontSize: 24,
+          fontSize: 28,
           fontFamily: "FonteTangerineNegrito",
           marginBottom: 10,
         },
@@ -41,24 +54,8 @@ function Menu() {
             <Image
               source={
                 focused
-                  ? require('./imagensapp/icones/home.png')
-                  : require('./imagensapp/icones/home.png')
-              }
-              style={{ width: 24, height: 24 }}
-            />
-          ),
-        }}
-      />
-      {/* <Tab.Screen
-        name="Obras"
-        component={SobreNos}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <Image
-              source={
-                focused
-                  ? require("./assets/icons/obras-focused.png")
-                  : require("./assets/icons/obras.png")
+                  ? require('./assets/imagensapp/icones/home.png') // Ícone selecionado
+                  : require('./assets/imagensapp/icones/homeInativo.png') // Ícone não selecionado
               }
               style={{ width: 24, height: 24 }}
             />
@@ -66,15 +63,32 @@ function Menu() {
         }}
       />
       <Tab.Screen
-        name="Citaçoes"
-        component={SobreNos}
+        name="Obras"
+        component={Obras}
         options={{
           tabBarIcon: ({ focused }) => (
             <Image
               source={
                 focused
-                  ? require("./assets/icons/citacoes-focused.png")
-                  : require("./assets/icons/citacoes.png")
+                  ? require('./assets/imagensapp/icones/arte.png') // Ícone selecionado
+                  : require('./assets/imagensapp/icones/arteInativo.png') // Ícone não selecionado
+              }
+              style={{ width: 24, height: 24 }}
+            />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="Citações"
+        component={Citacoes}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Image
+              source={
+                focused
+                  ? require('./assets/imagensapp/icones/citacoes.png') // Ícone selecionado
+                  : require('./assets/imagensapp/icones/citacoesInativo.png') // Ícone não selecionado
               }
               style={{ width: 24, height: 24 }}
             />
@@ -83,14 +97,14 @@ function Menu() {
       />
       <Tab.Screen
         name="Quiz"
-        component={SobreNos}
+        component={Quiz}
         options={{
           tabBarIcon: ({ focused }) => (
             <Image
               source={
                 focused
-                  ? require("./assets/icons/quiz-focused.png")
-                  : require("./assets/icons/quiz.png")
+                  ? require('./assets/imagensapp/icones/quiz.png') // Ícone selecionado
+                  : require('./assets/imagensapp/icones/quizInativo.png') // Ícone não selecionado
               }
               style={{ width: 24, height: 24 }}
             />
@@ -99,20 +113,20 @@ function Menu() {
       />
       <Tab.Screen
         name="Livros"
-        component={SobreNos}
+        component={Livros}
         options={{
           tabBarIcon: ({ focused }) => (
             <Image
               source={
                 focused
-                  ? require("./assets/icons/livros-focused.png")
-                  : require("./assets/icons/livros.png")
+                  ? require('./assets/imagensapp/icones/livros.png') // Ícone selecionado
+                  : require('./assets/imagensapp/icones/livrosInativo.png') // Ícone não selecionado
               }
               style={{ width: 24, height: 24 }}
             />
           ),
         }}
-      /> */}
+      />
     </Tab.Navigator>
   );
 }
