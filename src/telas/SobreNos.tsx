@@ -37,7 +37,7 @@ export default function SobreNos() {
 
 const estilos = StyleSheet.create({
     fundo: {
-        backgroundColor: "#e8e4db",
+        backgroundColor: "#f4f4f4",
         // criando a cor de fundo
         paddingVertical: 12,
         paddingHorizontal: 16,

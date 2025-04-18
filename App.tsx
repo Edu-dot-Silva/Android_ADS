@@ -1,24 +1,22 @@
 import React from "react";
 import { useFonts, Tangerine_400Regular, Tangerine_700Bold } from "@expo-google-fonts/tangerine";
 import { View } from "react-native";
-
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-// import  Ionicons  from 'react-native-vector-icons/Ionicons';
-import {Image} from "react-native";
+import { Image } from "react-native";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import SobreNos from "./src/telas/SobreNos";
-
 
 //Menu Obras
 import Obra from './src/telas/Obras';
 import MockObras from "./src/mocks/listaObras";
 import Citacoes from "./src/telas/Citacoes/Citacoes";
 import Quiz from "./src/telas/Quiz/Quiz";
-import Livros from "./src/telas/Citacoes/Citacoes";
+import Livros from "./src/telas/Livros/Livros";
 
 function Obras() {
-  return <Obra {...MockObras}/>
+  return <Obra {...MockObras} />
 }
 
 // configurando menu
@@ -140,8 +138,11 @@ export default function App() {
     return <View />
   }
 
-  return <NavigationContainer>
-    <Menu />
-  </NavigationContainer>
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <NavigationContainer>
+        <Menu />
+      </NavigationContainer>
+    </GestureHandlerRootView>
+  );
 }
-
