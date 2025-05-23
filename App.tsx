@@ -14,6 +14,7 @@ import MockObras from "./src/mocks/listaObras";
 import Citacoes from "./src/telas/Citacoes/Citacoes";
 import Quiz from "./src/telas/Quiz/Quiz";
 import Livros from "./src/telas/Livros/Livros";
+import Perfil from "./src/telas/Perfil";
 
 function Obras() {
   return <Obra {...MockObras} />
@@ -26,8 +27,8 @@ function Menu() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: "#e8e4db", // Cor da fonte quando o Tab.Screen está selecionado
-        tabBarInactiveTintColor: "#c0b091", // Cor da fonte quando o Tab.Screen não está selecionado
+        tabBarActiveTintColor: "#e8e4db",
+        tabBarInactiveTintColor: "#c0b091",
         headerShown: false,
         tabBarStyle: {
           backgroundColor: "#a38a5a",
@@ -93,7 +94,7 @@ function Menu() {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Quiz"
         component={Quiz}
         options={{
@@ -108,7 +109,7 @@ function Menu() {
             />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Livros"
         component={Livros}
@@ -119,6 +120,22 @@ function Menu() {
                 focused
                   ? require('./assets/imagensapp/icones/livros.png') // Ícone selecionado
                   : require('./assets/imagensapp/icones/livrosInativo.png') // Ícone não selecionado
+              }
+              style={{ width: 24, height: 24 }}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Perfil"
+        component={Perfil}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Image
+              source={
+                focused
+                  ? require('./assets/imagensapp/icones/perfil_selecionado.png') // Ícone selecionado
+                  : require('./assets/imagensapp/icones/perfil.png') // Ícone não selecionado
               }
               style={{ width: 24, height: 24 }}
             />
