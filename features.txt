@@ -1,3 +1,0 @@
-para proxima aula:
-tela de ciratoes tem botao que roda aleatorio
-corrigir titulo e descricao das obras 

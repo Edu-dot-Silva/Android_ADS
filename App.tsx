@@ -126,7 +126,7 @@ function Menu() {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Perfil"
         component={Perfil}
         options={{
@@ -141,7 +141,7 @@ function Menu() {
             />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 }

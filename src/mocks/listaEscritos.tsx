@@ -1,41 +1,41 @@
 const lista_obras = {
-    obras:{
+    obras: {
         titulo: "Obras de Leonardo Da Vinci",
         lista: [
             {
                 id: 1,
-                titulo: "Monalisa",
-                descricao: "A Monalisa é uma das obras mais icônicas de Leonardo da Vinci, famosa por seu sorriso enigmático e técnica de sfumato.",
+                titulo: "Autorretrato de Leonardo Da Vinci",
+                descricao: "Este retrato icônico, feito em sanguínea, representa a maturidade e o olhar introspectivo de Leonardo.",
                 imagem: require('../../assets/imagensapp/galeria/escritos/foto-1.png'),
             },
             {
                 id: 2,
-                titulo: "A Última Ceia",
-                descricao: "A Última Ceia é um mural que retrata a última refeição de Jesus com seus discípulos, conhecida por sua composição e simbolismo.",
+                titulo: "Homem Vitruviano",
+                descricao: "Símbolo da harmonia entre arte e ciência, o Homem Vitruviano representa as proporções ideais do corpo humano.",
                 imagem: require('../../assets/imagensapp/galeria/escritos/foto-11.png'),
             },
             {
                 id: 3,
-                titulo: "A Virgem e o Menino com Santa Ana",
-                descricao: "A Virgem e o Menino com Santa Ana é uma pintura que mostra a Virgem Maria com o Menino Jesus e sua mãe, Santa Ana.",
+                titulo: "Esboço de Flores",
+                descricao: "Estudo botânico de Leonardo que evidencia sua atenção aos detalhes da natureza e formas vegetais.",
                 imagem: require('../../assets/imagensapp/galeria/escritos/foto-19.png'),
             },
             {
                 id: 4,
-                titulo: "Dama com Arminho",
-                descricao: "Dama com Arminho é um retrato que destaca a habilidade de Leonardo em capturar a expressão e a textura.",
+                titulo: "Impressions of Nature",
+                descricao: "Conjunto de observações sobre os fenômenos naturais, demonstrando a curiosidade científica de Leonardo.",
                 imagem: require('../../assets/imagensapp/galeria/escritos/foto-29.png'),
             },
             {
                 id: 5,
-                titulo: "A Adoração dos Magos",
-                descricao:"A Adoração dos Magos (em italiano Adorazione dei Magi) é a grande pintura de Leonardo da Vinci, que a deixou inacabada (apenas com aguadas de tinta), por ocasião de sua partida para Milão. Foi feita entre 1481 e 1482, em óleo sobre madeira, e mede 246cm x 243cm.",
+                titulo: "Study of Hands",
+                descricao: "Estudo anatômico de mãos humanas, revelando a precisão de Leonardo ao retratar gestos e articulações.",
                 imagem: require('../../assets/imagensapp/galeria/escritos/foto-35.png'),
             },
             {
                 id: 6,
-                titulo: "São João Batista",
-                descricao: "São João Batista é uma pintura que retrata o santo com um sorriso enigmático e um gesto que aponta para o céu.",
+                titulo: "Codex Arundel",
+                descricao: "Manuscrito com notas e desenhos de diversos estudos científicos feitos por Leonardo ao longo de décadas.",
                 imagem: require('../../assets/imagensapp/galeria/escritos/caderno-1.png'),
             }
         ]
