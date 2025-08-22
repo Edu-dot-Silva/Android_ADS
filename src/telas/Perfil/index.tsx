@@ -1,14 +1,50 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import Texto from "../../componentes/Texto";
-import { View, TextInput, TouchableOpacity } from "react-native";
+import { View, TextInput, TouchableOpacity, Alert } from "react-native";
 import { Card } from "react-native-paper";
 import styles  from "./estilosPerfil";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { CameraView,CameraType, useCameraPermissions } from "expo-camera";
+import { CameraView, CameraType, useCameraPermissions } from "expo-camera";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Perfil() {
     const [facing, setFacing] = useState<CameraType>('back');
     const [permission, requestPermission] = useCameraPermissions();
+
+    // campos do formulario
+    const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
+    const [whatsapp, setWhatsapp] = useState('');
+
+    // carrega dados do perfil
+    useEffect(() => {
+        async function carregarPerfil() {
+
+            const perfilSalvo = await AsyncStorage.getItem('perfil');
+            
+            if (perfilSalvo) {
+                const perfil = JSON.parse(perfilSalvo);
+                setNome(perfil.nome);
+                setEmail(perfil.email);
+                setWhatsapp(perfil.whatsapp);
+            }
+        }
+        carregarPerfil();
+    }, []);
+
+
+    // função para salvar os dados do perfil
+    async function salvarPerfil() {
+        const perfil = {
+            nome,
+            email,
+            whatsapp
+        }
+        await AsyncStorage.setItem('perfil', JSON.stringify(perfil));
+        Alert.alert('Perfil salvo com sucesso!');
+        console.log(perfil);        
+    }
+
 
     if (!permission) {
         return <View/>;
@@ -27,6 +63,8 @@ export default function Perfil() {
         setFacing(current=>(current === 'back' ? 'front' : 'back'));
     }
 
+
+
   return (
     <View style={styles.container}>
         <CameraView style={styles.camera} facing={facing}>
@@ -39,15 +77,33 @@ export default function Perfil() {
         <Card mode="elevated" style={styles.cardContainer}>
             <Card.Content>
                 <Texto style={styles.text}>Nome: </Texto>
-                <TextInput style={styles.input} placeholder="Leonardo da Vinci"/>
+                <TextInput 
+                    style={styles.input} 
+                    value={nome} 
+                    onChangeText={setNome} 
+                />
 
                 <Texto style={styles.text}>Email: </Texto>
-                <TextInput style={styles.input} placeholder="leonardo.davinci@gmail.com"/>
+                <TextInput 
+                    style={styles.input} 
+                    value={email} 
+                    onChangeText={setEmail} 
+                />
 
                 <Texto style={styles.text}>Whatsapp: </Texto>
-                <TextInput style={styles.input} placeholder="(11) 98636-4702" keyboardType="numeric"/>
+                <TextInput 
+                    style={styles.input} 
+                    value={whatsapp} 
+                    onChangeText={setWhatsapp} 
+                    keyboardType="phone-pad"
+                />
 
             </Card.Content>
+            <Card.Actions>
+                <TouchableOpacity style={styles.botao} onPress={salvarPerfil}>
+                    <Texto style={styles.textoBotao}> Salvar </Texto>
+                </TouchableOpacity>
+            </Card.Actions>
             </Card>
     </View>
   );

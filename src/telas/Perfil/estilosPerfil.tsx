@@ -78,6 +78,20 @@ const Styles = StyleSheet.create({
     alignSelf: 'flex-end',
     alignItems: 'center',
   },
+  botao:{
+    width: '25%',
+    backgroundColor: 'purple',
+    borderRadius: 4,
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textoBotao:{
+    width: '100%',
+    color: 'white',
+    fontSize: 18,
+    textAlign: 'center',
+  }
 });
 
 export default Styles;

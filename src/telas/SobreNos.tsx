@@ -25,8 +25,8 @@ export default function SobreNos() {
             Além de sua habilidade artística, Leonardo também fez anotações detalhadas sobre anatomia, física, mecânica e engenharia, criando projetos para máquinas, aviões e dispositivos que estavam bem à frente de seu tempo.
             {'\n'}
             {'\n'}
-            Seu talento multidisciplinar e sua busca incessante pelo conhecimento o tornaram uma figura central no Renascimento, um período de grandes avanços nas ciências e nas artes.</Texto>
-
+            Seu talento multidisciplinar e sua busca incessante pelo conhecimento o tornaram uma figura central no Renascimento, um período de grandes avanços nas ciências e nas artes.
+        </Texto>            
         <Image source={require('..//..//assets/davinci3.jpg')} style={estilos.img_davinci} resizeMode="contain"></Image>
     
         <Texto style={estilos.texto_sobre_video}> Sugerimos o vídeo abaixo para melhor entendimento e experiência no app! </Texto>
@@ -63,7 +63,6 @@ const estilos = StyleSheet.create({
         alignSelf: 'center',
         borderRadius: 20,
         margin: 15,
-
     },
     estilo_video:{
         width: 450,

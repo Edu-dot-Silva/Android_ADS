@@ -1,10 +1,11 @@
 import React from "react";
 import { useFonts, Tangerine_400Regular, Tangerine_700Bold } from "@expo-google-fonts/tangerine";
-import { View } from "react-native";
+import { TouchableOpacity, View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Image } from "react-native";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useAudioPlayer } from "expo-audio";
 
 import SobreNos from "./src/telas/SobreNos";
 
@@ -20,6 +21,48 @@ function Obras() {
   return <Obra {...MockObras} />
 }
 
+// função que executa audio
+function MenuAudio() {
+  const audioSource = require('./src/assets/audio/musica.mp3');
+  const player = useAudioPlayer(audioSource);
+  const [isPlaying, setIsPlaying] = React.useState(false);
+
+  React.useEffect(() => {
+    // Automatically play the audio when the component mounts
+    player.play();
+    setIsPlaying(true);
+
+    // Optional cleanup to stop the audio when the component unmounts
+    return () => {
+      player.pause();
+    };
+  }, []);
+
+  const toggleAudio = () => {
+    if (isPlaying) {
+      player.pause();
+    } else {
+      player.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  return (
+    <View style={{ alignItems: "center", marginBottom: 20 }}>
+      <TouchableOpacity onPress={toggleAudio}>
+        <Image
+          source={
+            isPlaying
+              ? require('./assets/imagensapp/icones/on.png') 
+              : require('./assets/imagensapp/icones/off.png')
+          }
+          style={{ width: 20, height: 20 }}
+        />
+      </TouchableOpacity>
+    </View>
+  );
+}
+
 // configurando menu
 const Tab = createBottomTabNavigator();
 
@@ -32,16 +75,14 @@ function Menu() {
         headerShown: false,
         tabBarStyle: {
           backgroundColor: "#a38a5a",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: 60,
-          padding: 8
+          height: 60, 
+          paddingBottom: 4, 
+          paddingTop: 4,
         },
         tabBarLabelStyle: {
-          fontSize: 28,
+          fontSize: 20, 
           fontFamily: "FonteTangerineNegrito",
-          marginBottom: 10,
+          marginBottom: 0, 
         },
       }}
     >
@@ -94,7 +135,7 @@ function Menu() {
           ),
         }}
       />
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Quiz"
         component={Quiz}
         options={{
@@ -109,7 +150,7 @@ function Menu() {
             />
           ),
         }}
-      /> */}
+      />
       <Tab.Screen
         name="Livros"
         component={Livros}
@@ -126,7 +167,7 @@ function Menu() {
           ),
         }}
       />
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Perfil"
         component={Perfil}
         options={{
@@ -141,7 +182,7 @@ function Menu() {
             />
           ),
         }}
-      /> */}
+      />
     </Tab.Navigator>
   );
 }
@@ -159,6 +200,7 @@ export default function App() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <NavigationContainer>
         <Menu />
+        <MenuAudio/>
       </NavigationContainer>
     </GestureHandlerRootView>
   );
