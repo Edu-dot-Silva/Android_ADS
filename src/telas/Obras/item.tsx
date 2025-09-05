@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Card, Modal, Portal, Provider } from "react-native-paper";
-import { View, TouchableWithoutFeedback, Image } from "react-native";
+import { View, TouchableWithoutFeedback, Image, TouchableOpacity, StyleSheet } from "react-native";
 import Texto from "../../componentes/Texto";
 import {
   PinchGestureHandler,
@@ -18,13 +18,19 @@ type ContextType = {
   startScale: number;
 };
 
-export default function Item({ cadaObra: { id, titulo, descricao, imagem } }: any) {
+export default function Item({ cadaObra: { id, titulo, descricao, imagem }, onFavoritar, categoria }: any) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [isFavorito, setIsFavorito] = useState(categoria === "Favoritos"); // Pre-fill for "Favoritos"
   const scale = useSharedValue(1);
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
     scale.value = withTiming(1); // Reset zoom
+  };
+
+  const toggleFavorito = () => {
+    setIsFavorito(!isFavorito);
+    onFavoritar(); // Call the parent-provided function
   };
 
   // Manipulador de gesto de pinça (zoom)
@@ -62,6 +68,16 @@ export default function Item({ cadaObra: { id, titulo, descricao, imagem } }: an
             <Texto style={{ fontFamily: "FonteRegular", fontSize: 24, color: "#a38a5a" }}>
               {descricao}
             </Texto>
+            <TouchableOpacity onPress={toggleFavorito} style={styles.favoritoButton}>
+              <Image
+                source={
+                  isFavorito
+                    ? require("../../../assets/imagensapp/icones/coracao_preenchido.png")
+                    : require("../../../assets/imagensapp/icones/coracao.png")
+                }
+                style={styles.favoritoIcon}
+              />
+            </TouchableOpacity>
           </Card.Content>
         </Card>
 
@@ -89,3 +105,14 @@ export default function Item({ cadaObra: { id, titulo, descricao, imagem } }: an
     </Provider>
   );
 }
+
+const styles = StyleSheet.create({
+  favoritoButton: {
+    marginTop: 10, 
+    alignSelf: "center",
+  },
+  favoritoIcon: {
+    width: 24, 
+    height: 24,
+  },
+});

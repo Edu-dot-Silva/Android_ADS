@@ -10,10 +10,11 @@ import Item from "./item";
 
 export default function Index() {
   const [categoria, setCategoria] = useState("Arte");
+  const [listaFavoritos, setListaFavoritos] = useState([]); // State to store favorite items
   const fadeAnim = useRef(new Animated.Value(1)).current; // Animação de opacidade
   const slideAnim = useRef(new Animated.Value(0)).current; // Animação de deslocamento
 
-  const categorias = ["Arte", "Engenharia", "Ciência", "Cadernos"];
+  const categorias = ["Arte", "Engenharia", "Ciência", "Cadernos", "Favoritos"]; // Add "Favoritos" to the categories
   const dados =
     categoria === "Arte"
       ? lista_obras.obras
@@ -21,7 +22,9 @@ export default function Index() {
       ? lista_engenharia.obras
       : categoria === "Ciência"
       ? lista_ciencia.obras
-      : lista_escritos.obras;
+      : categoria === "Cadernos"
+      ? lista_escritos.obras
+      : { lista: listaFavoritos }; // Use listaFavoritos for "Favoritos"
 
   const proximaCategoria = () => {
     const indexAtual = categorias.indexOf(categoria);
@@ -56,6 +59,29 @@ export default function Index() {
     });
   };
 
+  const adicionarAosFavoritos = async (obra) => {
+    try {
+      if (categoria === "Favoritos") {
+        // Remove from favorites if in "Favoritos" category
+        setListaFavoritos((prevFavoritos) =>
+          prevFavoritos.filter((item) => item.id !== obra.id)
+        );
+        console.log(`Removendo ${obra.titulo} dos favoritos...`);
+      } else {
+        // Add to favorites if not already in the list
+        console.log(`Adicionando ${obra.titulo} aos favoritos...`);
+        setListaFavoritos((prevFavoritos) => {
+          if (prevFavoritos.some((item) => item.id === obra.id)) {
+            return prevFavoritos;
+          }
+          return [...prevFavoritos, obra];
+        });
+      }
+    } catch (error) {
+      console.error("Erro ao gerenciar favoritos:", error);
+    }
+  };
+
   return (
     <View style={{ flex: 1 }}>
       {/* Cabeçalho com botão de navegação */}
@@ -84,11 +110,23 @@ export default function Index() {
 
       {/* Lista de itens */}
       <Animated.View style={{ flex: 1, opacity: fadeAnim }}>
-        <FlatList
-          data={dados.lista}
-          renderItem={({ item }: any) => <Item cadaObra={item} />}
-          keyExtractor={(item) => item.titulo}
-        />
+        {categoria === "Favoritos" && listaFavoritos.length === 0 ? (
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>Sem obras favoritadas</Text>
+          </View>
+        ) : (
+          <FlatList
+            data={dados.lista}
+            renderItem={({ item }: any) => (
+              <Item
+                cadaObra={item}
+                onFavoritar={() => adicionarAosFavoritos(item)}
+                categoria={categoria} // Pass the current category
+              />
+            )}
+            keyExtractor={(item) => item.titulo}
+          />
+        )}
       </Animated.View>
     </View>
   );
@@ -116,5 +154,15 @@ const styles = StyleSheet.create({
   },
   iconFlipped: {
     transform: [{ rotate: "180deg" }],
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  emptyText: {
+    fontSize: 32, // Increased font size
+    color: "#a38a5a",
+    fontFamily: "FonteRegular",
   },
 });

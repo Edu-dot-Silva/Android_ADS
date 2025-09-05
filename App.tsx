@@ -24,25 +24,45 @@ function Obras() {
 // função que executa audio
 function MenuAudio() {
   const audioSource = require('./src/assets/audio/musica.mp3');
-  const player = useAudioPlayer(audioSource);
+  const [player, setPlayer] = React.useState(null);
   const [isPlaying, setIsPlaying] = React.useState(false);
 
   React.useEffect(() => {
-    // Automatically play the audio when the component mounts
-    player.play();
-    setIsPlaying(true);
+    const initializePlayer = async () => {
+      const audioPlayer = await useAudioPlayer(audioSource);
+      setPlayer(audioPlayer);
+      audioPlayer.play();
+      setIsPlaying(true);
+    };
 
-    // Optional cleanup to stop the audio when the component unmounts
+    initializePlayer();
+
     return () => {
-      player.pause();
+      if (player) {
+        try {
+          player.pause();
+        } catch (error) {
+          console.error("Erro ao pausar o áudio:", error);
+        }
+      }
     };
   }, []);
 
   const toggleAudio = () => {
+    if (!player) return;
+
     if (isPlaying) {
-      player.pause();
+      try {
+        player.pause();
+      } catch (error) {
+        console.error("Erro ao pausar o áudio:", error);
+      }
     } else {
-      player.play();
+      try {
+        player.play();
+      } catch (error) {
+        console.error("Erro ao reproduzir o áudio:", error);
+      }
     }
     setIsPlaying(!isPlaying);
   };

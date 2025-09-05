@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Texto from "../../componentes/Texto";
-import { View, TextInput, TouchableOpacity, Alert } from "react-native";
+import {KeyboardAvoidingView , View, TextInput, TouchableOpacity, Alert, Platform } from "react-native";
 import { Card } from "react-native-paper";
 import styles  from "./estilosPerfil";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { CameraView, CameraType, useCameraPermissions } from "expo-camera";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function Perfil() {
     const [facing, setFacing] = useState<CameraType>('back');
@@ -64,47 +65,47 @@ export default function Perfil() {
     }
 
 
-
   return (
-    <View style={styles.container}>
-        <CameraView style={styles.camera} facing={facing}>
-            <View style={styles.cameraContainer}>
-                <TouchableOpacity style={styles.cameraVirarBotao} onPress={toggleCameraFacing}>
-                    <Ionicons name="reload" size={30} color="purple" />
-                </TouchableOpacity>
-            </View>
-        </CameraView>
-        <Card mode="elevated" style={styles.cardContainer}>
-            <Card.Content>
-                <Texto style={styles.text}>Nome: </Texto>
-                <TextInput 
-                    style={styles.input} 
-                    value={nome} 
-                    onChangeText={setNome} 
-                />
-
-                <Texto style={styles.text}>Email: </Texto>
-                <TextInput 
-                    style={styles.input} 
-                    value={email} 
-                    onChangeText={setEmail} 
-                />
-
-                <Texto style={styles.text}>Whatsapp: </Texto>
-                <TextInput 
-                    style={styles.input} 
-                    value={whatsapp} 
-                    onChangeText={setWhatsapp} 
-                    keyboardType="phone-pad"
-                />
-
-            </Card.Content>
-            <Card.Actions>
-                <TouchableOpacity style={styles.botao} onPress={salvarPerfil}>
-                    <Texto style={styles.textoBotao}> Salvar </Texto>
-                </TouchableOpacity>
-            </Card.Actions>
-            </Card>
-    </View>
+    <KeyboardAvoidingView
+    style={{ flex: 1 }}
+    behavior={Platform.OS === "ios" ? "padding" : undefined}
+    keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
+  >
+    <ScrollView
+      contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+      keyboardShouldPersistTaps="handled"
+      style={styles.container}
+    >
+      <CameraView style={styles.camera} facing={facing}>
+        <View style={styles.cameraContainer}>
+          <TouchableOpacity style={styles.cameraVirarBotao} onPress={toggleCameraFacing}>
+            <Ionicons name="reload" size={30} color="purple" />
+          </TouchableOpacity>
+        </View>
+      </CameraView>
+      <Card mode="elevated" style={styles.cardContainer}>
+        <Card.Content>
+          <Texto style={styles.text}>Nome: </Texto>
+          <TextInput style={styles.input} value={nome} onChangeText={setNome} />
+  
+          <Texto style={styles.text}>Email: </Texto>
+          <TextInput style={styles.input} value={email} onChangeText={setEmail} />
+  
+          <Texto style={styles.text}>Whatsapp: </Texto>
+          <TextInput
+            style={styles.input}
+            value={whatsapp}
+            onChangeText={setWhatsapp}
+            keyboardType="phone-pad"
+          />
+        </Card.Content>
+        <Card.Actions>
+          <TouchableOpacity style={styles.botao} onPress={salvarPerfil}>
+            <Texto style={styles.textoBotao}>Salvar</Texto>
+          </TouchableOpacity>
+        </Card.Actions>
+      </Card>
+    </ScrollView>
+  </KeyboardAvoidingView>
   );
 }

@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 const Styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
   },
   cardContainer: {
     marginTop: 20,
@@ -79,16 +78,18 @@ const Styles = StyleSheet.create({
     alignItems: 'center',
   },
   botao:{
-    width: '25%',
-    backgroundColor: 'purple',
+    width: '30%',
+    backgroundColor: '#a38a5a',
     borderRadius: 4,
     padding: 10,
     alignItems: 'center',
     justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop: 10,
   },
   textoBotao:{
     width: '100%',
-    color: 'white',
+    color: '#FFFFFF',
     fontSize: 18,
     textAlign: 'center',
   }
